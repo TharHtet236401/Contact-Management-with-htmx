@@ -46,5 +46,8 @@ def add_contact(request):
         context = {
             "contact": contact
         }
-        return render(request, 'partials/contact-row.html', context)
+        response = render(request, 'partials/contact-row.html', context)
+        response['HX-Trigger'] = 'success'
+        return response
+    
     
