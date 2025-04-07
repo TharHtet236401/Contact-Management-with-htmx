@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from .forms import ContactForm
+from django.views.decorators.http import require_http_methods
 
 # Create your views here.
 @login_required
@@ -31,3 +32,19 @@ def search_contacts(request):
         "contacts": contacts
     }
     return render(request, 'partials/contacts-list.html', context)
+
+
+
+@login_required
+@require_http_methods(['POST'])
+def add_contact(request):
+    form = ContactForm(request.POST)
+    if form.is_valid():
+        contact = form.save(commit=False)
+        contact.user = request.user
+        contact.save()
+        context = {
+            "contact": contact
+        }
+        return render(request, 'partials/contact-row.html', context)
+    
