@@ -1,0 +1,12 @@
+<div  id="contacts-list">
+    {% if contacts %}
+        {% for contact in contacts %}
+            <div class="contact">
+                <h3>{{ contact.name }}</h3>
+            <p>{{ contact.email }}</p>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>No contacts found</p>
+    {% endif %}
+</div>
