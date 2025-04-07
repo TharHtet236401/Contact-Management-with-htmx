@@ -13,7 +13,9 @@
             hx-get="{% url 'search' %}"
             hx-trigger="keyup delay:1s"
             hx-target="#contacts-list"
-            hx-indicator="#spinner" />
+            hx-indicator="#spinner" 
+            hx-on::before-request="document.getElementById('contacts-list').style.opacity = 0.4;"
+            hx-on::after-request="document.getElementById('contacts-list').style.opacity = 1.0;" />
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 16 16"

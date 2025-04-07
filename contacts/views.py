@@ -13,7 +13,9 @@ def index(request):
 
 
 @login_required
-def search_contacts(request):   
+def search_contacts(request):  
+    import time
+    time.sleep(2)
     search_query = request.GET.get('search')
     q_object = Q()
     if search_query:
