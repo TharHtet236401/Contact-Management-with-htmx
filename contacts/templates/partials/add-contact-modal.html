@@ -3,7 +3,7 @@
         
         <h3 class="font-bold text-lg mb-4">Add New Contact</h3>
 
-        <form hx-post="{% url 'add' %}" class="mb-4">
+        <form hx-post="{% url 'add' %}" hx-target="#row_body" hx-swap="afterbegin" class="mb-4">
             {% csrf_token %}
 
             <div class="form-control w-full">
