@@ -10,6 +10,7 @@
             class="grow" 
             placeholder="Search" 
             name="search" 
+            hx-get="{% url 'search' %}"
             hx-trigger="keyup delay:1s"
             hx-target="#contacts-list" />
         <svg
