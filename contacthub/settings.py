@@ -124,7 +124,15 @@ STORAGES = {
     }
 }
 
-AWS_S3_ACCESS_KEY_ID = os.environ.get('AWS_S3_ACCESS_KEY_ID')
-AWS_S3_SECRET_ACCESS_KEY = os.environ.get('AWS_S3_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = 'contact-hub-thar-htet'
-AWS_S3_REGION_NAME = 'ap-southeast-2'
+#used by power shell env
+# AWS_S3_ACCESS_KEY_ID = os.environ.get('AWS_S3_ACCESS_KEY_ID')
+# AWS_S3_SECRET_ACCESS_KEY = os.environ.get('AWS_S3_SECRET_ACCESS_KEY')
+# AWS_STORAGE_BUCKET_NAME = 'contact-hub-thar-htet'
+# AWS_S3_REGION_NAME = 'ap-southeast-2'
+
+from decouple import config
+
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+AWS_REGION = config('AWS_S3_REGION_NAME')
