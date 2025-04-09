@@ -12,6 +12,9 @@
         {% endif %}
     </td>
     <td>
+        <button class="btn btn-xs btn-warning" onclick="edit_contact_modal.showModal()">Edit</button>
+    </td>
+    <td>
         <button class="btn btn-xs btn-error"
             hx-delete="{% url 'delete' contact.id %}"
             hx-on:contact-deleted="this.closest('tr').remove();"
