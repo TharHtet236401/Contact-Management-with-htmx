@@ -3,6 +3,10 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from .forms import ContactForm
 from django.views.decorators.http import require_http_methods
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponse
+from .models import Contact
+from django.shortcuts import redirect
 
 # Create your views here.
 @login_required
@@ -55,4 +59,12 @@ def add_contact(request):
        return response
     
     
-    
+
+@login_required
+@require_http_methods(['DELETE'])
+def delete_contact(request, pk):
+    contact = get_object_or_404(Contact, pk=pk, user=request.user)
+    contact.delete()
+    response = HttpResponse(status=204)
+    response['HX-Trigger'] = 'contact-deleted'
+    return response

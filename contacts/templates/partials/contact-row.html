@@ -13,7 +13,7 @@
     </td>
     <td>
         <button class="btn btn-xs btn-error"
-            hx-delete="{% ''}"
+            hx-delete="{% url 'delete' contact.id %}"
             hx-on:contact-deleted="this.closest('tr').remove();"
             hx-confirm="Are you sure you wish to delete this contact?">Delete</button>
     </td>

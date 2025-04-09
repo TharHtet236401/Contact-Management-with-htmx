@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,9 +9,8 @@
     <link href="{% static 'css/output.css' %}" rel="stylesheet" />
     <script src="{% static 'js/htmx.min.js' %}"></script>
 
-
 </head>
-<body>
+<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
 
     <div class="m-12">
         {% block content %}

@@ -6,8 +6,8 @@
         <form hx-encoding="multipart/form-data" hx-post="{% url 'add' %}" hx-target="#contact-table-body" hx-swap="afterbegin"  hx-on:success="contact_modal.close(); this.reset()" class="mb-4" >
             {% csrf_token %}
 
-            <div class="form-control w-full">
-            <label class="label">
+            <div class="form-control w-full mb-4">
+            <label class="label mb-2">
                 <span class="label-text">Name</span>
             </label>
 
@@ -21,8 +21,8 @@
 
             </div>
 
-            <div class="form-control w-full">
-            <label class="label">
+            <div class="form-control w-full mb-4">
+            <label class="label mb-2">
                 <span class="label-text">Email</span>
             </label>
 
@@ -36,8 +36,8 @@
 
             </div>
 
-            <div class="form-control w-full">
-                <label class="label">
+            <div class="form-control w-full mb-4">
+                <label class="label mb-2">
                     <span class="label-text">Document</span>
                 </label>
 
