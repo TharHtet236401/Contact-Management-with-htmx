@@ -80,9 +80,7 @@ def edit_contact(request, pk):
             form = ContactForm(request.POST, request.FILES, instance=contact)
             if form.is_valid():
                 form.save()
-                response = render(request, 'partials/contact-row.html', {'contact': contact})
-                response['HX-Trigger'] = 'edit-success'
-                return response
+                return redirect('index')
         else:
             form = ContactForm(instance=contact)
         
