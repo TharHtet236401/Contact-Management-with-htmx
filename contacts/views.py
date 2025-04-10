@@ -68,3 +68,25 @@ def delete_contact(request, pk):
     response = HttpResponse(status=204)
     response['HX-Trigger'] = 'contact-deleted'
     return response
+
+
+@login_required
+@require_http_methods(['GET','POST'])
+def edit_contact(request, pk):
+    contact = get_object_or_404(Contact, pk=pk, user=request.user)
+    if request.method == 'POST':
+        form = ContactForm(request.POST, instance=contact)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = ContactForm(instance=contact)
+    context = {
+        "contact": contact,
+        "form": form
+    }
+    response = render(request, 'edit_contact.html', context)
+    return response
+
+
+

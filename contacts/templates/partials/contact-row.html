@@ -12,7 +12,10 @@
         {% endif %}
     </td>
     <td>
-        <button class="btn btn-xs btn-error">Edit</button>
+        <button class="btn btn-xs btn-error"
+            hx-get="{% url 'edit' contact.id %}"
+            hx-target="#main_view"
+            hx-swap="innerHTML">Edit</button>
     </td>
     <td>
         <button class="btn btn-xs btn-error"

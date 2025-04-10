@@ -5,21 +5,21 @@ from django.core.exceptions import ValidationError
 class ContactForm(forms.ModelForm):
     name = forms.CharField(
         widget=forms.TextInput(attrs={
-            'class': 'input input-bordered w-full',
+            'class': 'input input-bordered w-full mb-2',
             'placeholder': 'Contact Name'
         })
     )
 
     email = forms.EmailField(
         widget=forms.EmailInput(attrs={
-            'class': 'input input-bordered w-full',
+            'class': 'input input-bordered w-full mb-2',
             'placeholder': 'Email Address'
         })
     )    
 
     document = forms.FileField(
         widget=forms.FileInput(attrs={
-            'class': 'file-input file-input-bordered w-full',
+            'class': 'file-input file-input-bordered w-full mb-2',
         }),
         required=False
     )
