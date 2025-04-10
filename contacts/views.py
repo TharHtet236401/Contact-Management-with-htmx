@@ -76,10 +76,11 @@ def edit_contact(request, pk):
     try:
         contact = get_object_or_404(Contact, pk=pk, user=request.user)
         if request.method == 'POST':
+            print("it got here")
             form = ContactForm(request.POST, request.FILES, instance=contact)
             if form.is_valid():
                 form.save()
-                response = render(request, 'partials/contact-row.html', context)
+                response = render(request, 'partials/contact-row.html', {'contact': contact})
                 response['HX-Trigger'] = 'edit-success'
                 return response
         else:
