@@ -63,11 +63,21 @@ def add_contact(request):
 @login_required
 @require_http_methods(['DELETE'])
 def delete_contact(request, pk):
-    contact = get_object_or_404(Contact, pk=pk, user=request.user)
-    contact.delete()
-    response = HttpResponse(status=204)
-    response['HX-Trigger'] = 'contact-deleted'
-    return response
+    try:
+        contact = get_object_or_404(Contact, pk=pk, user=request.user)
+        
+        # Delete the file from S3 if it exists
+        if contact.document:
+            contact.document.delete(save=False)
+        
+        # Delete the contact
+        contact.delete()
+        response = HttpResponse(status=204)
+        response['HX-Trigger'] = 'contact-deleted'
+        return response
+    except Exception as e:
+        print(f"Error deleting contact: {e}")
+        return HttpResponse(status=500)
 
 
 @login_required
