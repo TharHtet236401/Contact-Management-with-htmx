@@ -71,22 +71,28 @@ def delete_contact(request, pk):
 
 
 @login_required
-@require_http_methods(['GET','POST'])
+@require_http_methods(['GET', 'POST'])
 def edit_contact(request, pk):
-    contact = get_object_or_404(Contact, pk=pk, user=request.user)
-    if request.method == 'POST':
-        form = ContactForm(request.POST, instance=contact)
-        if form.is_valid():
-            form.save()
-            return redirect('index')
-    else:
-        form = ContactForm(instance=contact)
-    context = {
-        "contact": contact,
-        "form": form
-    }
-    response = render(request, 'edit_contact.html', context)
-    return response
+    try:
+        contact = get_object_or_404(Contact, pk=pk, user=request.user)
+        if request.method == 'POST':
+            form = ContactForm(request.POST, request.FILES, instance=contact)
+            if form.is_valid():
+                form.save()
+                response = render(request, 'partials/contact-row.html', context)
+                response['HX-Trigger'] = 'edit-success'
+                return response
+        else:
+            form = ContactForm(instance=contact)
+        
+        context = {
+            "contact": contact,
+            "form": form
+        }
+        return render(request, 'edit_contact.html', context)
+    except Exception as e:
+        print(e)
+        return HttpResponse(status=500)
 
 
 
