@@ -86,10 +86,17 @@ def edit_contact(request, pk):
     try:
         contact = get_object_or_404(Contact, pk=pk, user=request.user)
         if request.method == 'POST':
-            print("it got here")
             form = ContactForm(request.POST, request.FILES, instance=contact)
             if form.is_valid():
-                form.save()
+                contact = form.save(commit=False)
+                
+                # Handle file removal if checkbox is checked
+                if request.POST.get('remove_document') == 'true':
+                    if contact.document:
+                        contact.document.delete(save=False)
+                        contact.document = None
+                
+                contact.save()
                 return redirect('index')
         else:
             form = ContactForm(instance=contact)
@@ -100,7 +107,7 @@ def edit_contact(request, pk):
         }
         return render(request, 'edit_contact.html', context)
     except Exception as e:
-        print(e)
+        print(f"Error editing contact: {e}")
         return HttpResponse(status=500)
 
 

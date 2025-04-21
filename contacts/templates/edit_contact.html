@@ -49,8 +49,16 @@
                    name="document" 
                    class="file-input file-input-bordered w-full">
             {% if contact.document %}
-                <div class="mt-2">
+                <div class="mt-2 flex items-center gap-2" id="current_file_section">
                     <span class="text-sm">Current file: {{ contact.document.name }}</span>
+                    <label class="cursor-pointer flex items-center gap-2">
+                        <input type="checkbox" 
+                               name="remove_document" 
+                               value="true" 
+                               class="checkbox checkbox-error"
+                               onchange="document.getElementById('current_file_section').classList.toggle('opacity-50')">
+                        <span class="text-sm text-error">Remove file</span>
+                    </label>
                 </div>
             {% endif %}
         </div>
